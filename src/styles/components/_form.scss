@@ -1,0 +1,59 @@
+.form {
+  &__group {
+    position: relative;
+
+    &:not(:last-of-type) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--text-gray);
+    pointer-events: none;
+
+    transition-property: top, font-size;
+    transition-duration: var(--transition-duration);
+    transition-timing-function: var(--transition-function);
+
+    &:after {
+      content: '*';
+      font-weight: 600;
+      color: var(--firm);
+      opacity: 0;
+    }
+  }
+
+  &__input {
+    @include resetInput;
+    padding: 16px 0 4px;
+    border-bottom: 1px solid var(--gray);
+    width: 100%;
+
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--black);
+
+    &::placeholder {
+      font-size: 0;
+    }
+  }
+
+  &__input:required + &__label:after {
+    opacity: 1;
+  }
+
+  &__input:focus-visible + &__label,
+  &__input:not(:placeholder-shown) + &__label {
+    top: 0;
+    font-size: 10px;
+  }
+
+  &__person-group {
+    margin-bottom: 25px;
+  }
+}

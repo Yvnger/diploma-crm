@@ -1,0 +1,39 @@
+.home {
+  &__title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--black);
+
+    @media (max-width: $break-xs) {
+      font-size: 18px;
+    }
+  }
+
+  &__table {
+    margin-bottom: 40px;
+
+    @media (max-width: $break-xs) {
+      overflow-x: scroll;
+    }
+  }
+
+  &__btn-bottom {
+    margin-bottom: 50px;
+
+    &--fixed {
+      position: fixed;
+      right: 0;
+      bottom: 100px;
+      left: 0;
+
+      opacity: .5;
+      transition: opacity var(--transition-duration) var(--transition-function);
+
+      &:focus,
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

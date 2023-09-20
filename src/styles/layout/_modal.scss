@@ -1,0 +1,110 @@
+.modal {
+  position: fixed; /* Используйте fixed, чтобы модальное окно оставалось видимым при прокрутке */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: rgba(var(--modal-overlay-bg), .6);
+  z-index: 1000; /* Убедитесь, что модальное окно всегда на переднем плане */
+  padding: 30px;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity var(--transition-duration) var(--transition-function);
+
+  overflow-y: scroll;
+  
+  @media (max-width: $break-xs) {
+    padding: 10px;
+  }
+
+  &--opened {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &--opened &__body {
+    transform: translateY(0);
+  }
+
+  &__body {
+    position: relative;
+    padding: 24px 30px;
+    max-width: var(--modal-max-width);
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 35px 0px rgba(0, 0, 0, 0.15);
+
+    transform: translateY(-100%);
+    transition: transform var(--transition-duration) var(--transition-function);
+
+    @media (max-width: $break-xs) {
+      padding: 24px 15px;
+    }
+  }
+
+  &__heading {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 5px;
+
+    &--center {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      max-width: 275px;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    margin-right: 9px;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--black);
+  }
+
+  &__description {
+    margin: 0;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    color: var(--text-gray);
+  }
+
+  &__heading--center &__title {
+    margin-bottom: 11px;
+  }
+
+  &__id {
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--text-gray);
+  }
+
+  &__close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    @include resetButton;
+    display: block;
+    width: 29px;
+    height: 29px;
+    mask: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkiIGhlaWdodD0iMjkiIHZpZXdCb3g9IjAgMCAyOSAyOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yMi4yMzMzIDcuNzMzMzNMMjEuMjY2NiA2Ljc2NjY2TDE0LjQ5OTkgMTMuNTMzNEw3LjczMzI0IDYuNzY2N0w2Ljc2NjU4IDcuNzMzMzZMMTMuNTMzMiAxNC41TDYuNzY2NiAyMS4yNjY3TDcuNzMzMjcgMjIuMjMzM0wxNC40OTk5IDE1LjQ2NjdMMjEuMjY2NiAyMi4yMzM0TDIyLjIzMzIgMjEuMjY2N0wxNS40NjY2IDE0LjVMMjIuMjMzMyA3LjczMzMzWiIvPgo8L3N2Zz4K");
+    background-color: var(--text-gray);
+
+    &:hover {
+      background-color: var(--black);
+    }
+
+    @media (max-width: $break-xs) {
+      top: 3px;
+      right: 3px;
+    }
+  }
+}

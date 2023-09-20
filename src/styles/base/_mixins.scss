@@ -1,0 +1,51 @@
+@mixin font-face($font-family, $font-path, $font-weight: normal, $font-style: normal) {
+  @font-face {
+    font-family: "#{$font-family}";
+    src: url("#{$font-path}.woff2") format("woff2"),
+    url("#{$font-path}.woff") format("woff"),
+    url("#{$font-path}.ttf") format("truetype");
+    font-weight: $font-weight;
+    font-style: $font-style;
+  }
+}
+
+@mixin reset {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: none;
+  cursor: inherit;
+  box-shadow: none;
+  display: inline-block;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin resetButton {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+@mixin resetList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin resetInput {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+}

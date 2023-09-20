@@ -1,0 +1,27 @@
+// Container
+$container-width: 1146px;
+$container-padding-side: 20px;
+$container-width-calculated: $container-width + ($container-padding-side * 2);
+
+// Breakpoints
+$break-lg: 1440px;
+$break-md: 1024px;
+$break-sm: 768px;
+$break-xs: 575px;
+
+:root {
+  --container-width: #{$container-width-calculated};
+  --container-padding: #{$container-padding-side};
+  --container-padding-mobile: 10px;
+  --transition-duration: .3s;
+  --transition-function: ease-in-out;
+  --table-body-height: 300px;
+  --table-row-height: calc(var(--table-body-height) / 5);
+  --modal-max-width: 450px;
+  --firm: #9873ff;
+  --red: #f06a4d;
+  --text-gray: #b0b0b0;
+  --gray: #c8c5d1;
+  --black: #333333;
+  --modal-overlay-bg: 51, 51, 51;
+}

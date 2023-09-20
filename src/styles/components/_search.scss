@@ -1,0 +1,64 @@
+.search {
+  &__input {
+    @include resetInput;
+    padding: 12px 16px;
+    width: 100%;
+    border: 1px solid #d6d6d6;
+    font-size: 14px;
+
+    &::placeholder {
+      color: var(--text-gray);
+    }
+  }
+
+  &__result {
+    &-wrap {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(100%);
+      transition-property: opacity, transform;
+      transition-duration: var(--transition-duration);
+      transition-timing-function: var(--transition-function);
+
+      &--has-results {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+    }
+
+    &-list {
+      @include resetList;
+      background-color: #fff;
+      box-shadow: 0px 3.3862948417663574px 5.643825054168701px 0px rgba(176, 190, 197, 0.32), 0px 9.030119895935059px 27.09035873413086px 0px rgba(176, 190, 197, 0.32);
+    }
+
+    &-item {
+      display: block;
+      padding: 15px;
+      background-color: #fff;
+      font-size: 14px;
+      color: var(--black);
+      cursor: pointer;
+
+      transition-property: background-color, border-color, color;
+      transition-duration: var(--transition-duration);
+      transition-timing-function: var(--transition-function);
+
+      &:hover {
+        background-color: var(--firm);
+        border-color: var(--firm);
+        color: white;
+      }
+      
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--gray);
+      }
+    }
+  }
+}

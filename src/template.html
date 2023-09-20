@@ -1,0 +1,482 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>CRM</title>
+</head>
+<body>
+
+<header class="header">
+    <div class="container--fluid">
+        <div class="header__inner">
+            <span class="header__logo"></span>
+
+            <form action="javascript:void(0)" class="header__search search">
+                <input type="search" class="search__input" placeholder="Введите запрос">
+
+                <div class="search__result-wrap">
+                    <ul class="search__result-list">
+                        <li class="search__result-item">Скворцов Денис Юрьевич</li>
+                        <li class="search__result-item">Куприянов Арсений Валерьевич</li>
+                        <li class="search__result-item">Константинопольская Людмила Александровна</li>
+                        <li class="search__result-item">Дмитриевский Олег Алексеевич</li>
+                        <li class="search__result-item">Александрова Татьяна Павловна</li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</header>
+
+<main class="home">
+    <div class="container">
+        <h1 class="home__title">Клиенты</h1>
+
+        <div class="home__table">
+            <div class="table">
+                <div class="table__head">
+                    <div class="table__row">
+                        <div class="table__cell">
+                            <a href="javascript:void(0)" class="table__head-sort table__head-sort--active table__head-sort--asc">
+                                ID <span class="table__head-sort-caption"></span>
+                                <div class="table__head-sort-hint">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="table__cell">
+                            <a href="javascript:void(0)" class="table__head-sort table__head-sort--desc">
+                                Фамилия Имя Отчество
+                                <span class="table__head-sort-caption">А-Я</span>
+                            </a>
+                        </div>
+                        <div class="table__cell">
+                            <a href="javascript:void(0)" class="table__head-sort table__head-sort--desc">
+                                Дата и время создания
+                                <span class="table__head-sort-caption"></span>
+                            </a>
+                        </div>
+                        <div class="table__cell">
+                            <a href="javascript:void(0)" class="table__head-sort table__head-sort--desc">
+                                Последние изменения
+                                <span class="table__head-sort-caption"></span>
+                            </a>
+                        </div>
+                        <div class="table__cell">
+                            Контакты
+                        </div>
+                        <div class="table__cell">
+                            Действия
+                        </div>
+                    </div>
+                </div>
+
+                <div id="client-list" class="table__body">
+                    <span class="loading"></span>
+                    @@loop('template-parts/table-item.html', [
+                    { "id": 123455, "name": "Скворцов Денис Юрьевич" },
+                    { "id": 123456, "name": "Куприянов Арсений Валерьевич" },
+                    { "id": 123457, "name": "Константинопольская Людмила Александровна" },
+                    { "id": 123458, "name": "Дмитриевский Олег Алексеевич" },
+                    { "id": 123459, "name": "Александрова Татьяна Павловна" }
+                    ])
+                </div>
+            </div>
+        </div>
+
+        <div class="home__btn-bottom">
+            <button class="btn btn--outline btn--add-client btn--fixed">Добавить клиента</button>
+        </div>
+    </div>
+</main>
+
+<!-- Modals -->
+<div id="new-client" class="modal">
+    <div class="modal__body">
+        <div class="modal__heading">
+            <h2 class="modal__title">Новый клиент</h2>
+        </div>
+
+        <button class="btn modal__close" aria-label="Закрыть окно"></button>
+
+        <form action="javascript:void(0)" class="form">
+            <div class="form__person-group">
+                <div class="form__group">
+                    <input type="text" class="form__input" id="surname" placeholder="Фамилия" required>
+                    <label class="form__label" for="surname">Фамилия</label>
+                </div>
+
+                <div class="form__group">
+                    <input type="text" class="form__input" id="name" placeholder="Имя" required>
+                    <label class="form__label" for="name">Имя</label>
+                </div>
+
+                <div class="form__group">
+                    <input type="text" class="form__input" id="patronymic" placeholder="Отчество">
+                    <label class="form__label" for="patronymic">Отчество</label>
+                </div>
+            </div>
+
+            <div class="contact-form__wrap contact-form__wrap--has-items">
+                <ul class="contact-form__items">
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <div class="contact-form__remove-wrap tooltip" data-tooltip="Удалить контакт">
+                            <button class="contact-form__remove contact-form__remove--active"></button>
+                        </div>
+                    </li>
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <button class="contact-form__remove contact-form__remove--active"></button>
+                    </li>
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <button class="contact-form__remove contact-form__remove--active"></button>
+                    </li>
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <button class="contact-form__remove contact-form__remove--active"></button>
+                    </li>
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <button class="contact-form__remove contact-form__remove--active"></button>
+                    </li>
+                </ul>
+
+                <button class="contact-form__add">
+                    <span class="contact-form__add-icon"></span>
+                    Добавить контакт
+                </button>
+            </div>
+
+            <span class="contact-form__error">
+                Ошибка: новая модель организационной деятельности предполагает независимые способы реализации поставленных обществом задач!
+            </span>
+
+            <button class="btn btn--primary btn--fill contact-form__submit">Сохранить</button>
+            <a href="javascript:void(0)" class="contact-form__bottom-link">Отмена</a>
+        </form>
+    </div>
+</div>
+
+<div id="edit-client" class="modal">
+    <div class="modal__body">
+        <div class="modal__heading">
+            <h2 class="modal__title">Изменить данные</h2>
+            <span class="modal__id">ID: 123458</span>
+        </div>
+
+        <button class="btn modal__close" aria-label="Закрыть окно"></button>
+
+        <form action="javascript:void(0)" class="form">
+            <div class="form__person-group">
+                <div class="form__group">
+                    <input type="text" class="form__input" id="surname" placeholder="Фамилия" required>
+                    <label class="form__label" for="surname">Фамилия</label>
+                </div>
+
+                <div class="form__group">
+                    <input type="text" class="form__input" id="name" placeholder="Имя" required>
+                    <label class="form__label" for="name">Имя</label>
+                </div>
+
+                <div class="form__group">
+                    <input type="text" class="form__input" id="patronymic" placeholder="Отчество">
+                    <label class="form__label" for="patronymic">Отчество</label>
+                </div>
+            </div>
+
+            <div class="contact-form__wrap contact-form__wrap--has-items">
+                <ul class="contact-form__items">
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <div class="contact-form__remove-wrap tooltip" data-tooltip="Удалить контакт">
+                            <button class="contact-form__remove contact-form__remove--active"></button>
+                        </div>
+                    </li>
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <div class="contact-form__remove-wrap tooltip" data-tooltip="Удалить контакт">
+                            <button class="contact-form__remove contact-form__remove--active"></button>
+                        </div>
+                    </li>
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <div class="contact-form__remove-wrap tooltip" data-tooltip="Удалить контакт">
+                            <button class="contact-form__remove contact-form__remove--active"></button>
+                        </div>
+                    </li>
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <div class="contact-form__remove-wrap tooltip" data-tooltip="Удалить контакт">
+                            <button class="contact-form__remove contact-form__remove--active"></button>
+                        </div>
+                    </li>
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <div class="contact-form__remove-wrap tooltip" data-tooltip="Удалить контакт">
+                            <button class="contact-form__remove contact-form__remove--active"></button>
+                        </div>
+                    </li>
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <div class="contact-form__remove-wrap tooltip" data-tooltip="Удалить контакт">
+                            <button class="contact-form__remove contact-form__remove--active"></button>
+                        </div>
+                    </li>
+
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <button class="contact-form__remove contact-form__remove--active"></button>
+                    </li>
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <button class="contact-form__remove contact-form__remove--active"></button>
+                    </li>
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <button class="contact-form__remove contact-form__remove--active"></button>
+                    </li>
+                    <li class="contact-form__item">
+                        <div class="contact-form__select">
+                            <button class="contact-form__select-button">Телефон</button>
+
+                            <ul class="contact-form__select-items">
+                                <li class="contact-form__select-item">Телефон</li>
+                                <li class="contact-form__select-item">Доп. телефон</li>
+                                <li class="contact-form__select-item">Email</li>
+                                <li class="contact-form__select-item">Vk</li>
+                                <li class="contact-form__select-item">Facebook</li>
+                            </ul>
+                        </div>
+
+                        <input type="text" class="contact-form__input" placeholder="Введите данные контакта"/>
+
+                        <button class="contact-form__remove contact-form__remove--active"></button>
+                    </li>
+                </ul>
+
+                <button class="contact-form__add">
+                    <span class="contact-form__add-icon"></span>
+                    Добавить контакт
+                </button>
+            </div>
+
+            <span class="contact-form__error">
+                Ошибка: новая модель организационной деятельности предполагает независимые способы реализации поставленных обществом задач!
+            </span>
+
+            <button class="btn btn--primary btn--fill contact-form__submit">Сохранить</button>
+            <a href="javascript:void(0)" class="contact-form__bottom-link">Отмена</a>
+        </form>
+    </div>
+</div>
+
+<div id="delete-client" class="modal">
+    <div class="modal__body">
+        <div class="modal__heading modal__heading--center">
+            <h2 class="modal__title">Изменить данные</h2>
+            <p class="modal__description">Вы действительно хотите удалить данного клиента?</p>
+        </div>
+
+        <button class="btn modal__close" aria-label="Закрыть окно"></button>
+
+        <button class="btn btn--primary btn--fill contact-form__submit">Удалить</button>
+        <a href="javascript:void(0)" class="contact-form__bottom-link">Отмена</a>
+    </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
