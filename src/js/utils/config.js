@@ -1,6 +1,9 @@
 // ID контейнера приложения в index.html
 export const APP_CONTAINER_ID = 'app';
 
+// Заголовок приложения
+export const APP_TITLE = 'Клиенты';
+
 // Сортировка по умолчанию
 export const SORT_PROPERTY_DEFAULT = 'id';
 export const SORT_ORDER_DEFAULT = 'asc';

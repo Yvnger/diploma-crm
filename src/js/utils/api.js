@@ -7,7 +7,11 @@ export async function getClients(query = null) {
 
         await new Promise(resolve => setTimeout(resolve, TIMEOUT_DURATION));
 
-        return data;
+        if (!query) {
+            return data;
+        }
+
+
     } catch (error) {
         console.error('Произошла ошибка:', error);
         throw error; // Пробрасывание ошибки для обработки на верхнем уровне
@@ -33,8 +37,8 @@ export async function addClient(data) {
     const user = {
         name: data.name,
         surname: data.surname,
-        lastName: data.patronymic,
-        contacts: data.contacts
+        lastName: data.lastName,
+        // contacts: data.contacts
         // contacts: [
         //     {
         //         type: 'Телефон',
@@ -58,12 +62,30 @@ export async function addClient(data) {
         },
         body: JSON.stringify(user)
     })
-        .then(response => response.json())
-        .then(result => {
-            console.log('Результат:', result);
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw data;
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Результат:', data);
+            return null;  // Возвращаем null, если нет ошибок
         })
         .catch(error => {
-            console.error('Ошибка:', error);
+            if (error.errors) {
+                // Обработка ошибок
+                const errorMessages = {};
+                for (const [field, message] of Object.entries(error.errors)) {
+                    errorMessages[field] = message;
+                }
+                return errorMessages;
+            } else {
+                console.error('Ошибка:', error);
+                return {general: 'Произошла неизвестная ошибка'};
+            }
         });
 }
 

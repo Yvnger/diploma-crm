@@ -56,7 +56,7 @@ const html = () => {
             basepath: '@file'
         }))
         .pipe(replace('main.css', isProduction ? 'main.min.css' : 'main.css'))
-        .pipe(replace('main.js', isProduction ? 'main.min.js' : 'main.js'))
+        .pipe(replace('app.js', isProduction ? 'main.min.js' : 'app.js'))
         .pipe(typograf({ locale: ['ru', 'en-US'] }));
 
     if (isProduction) {
@@ -94,9 +94,9 @@ const woff2 = () => {
 }
 
 // const scripts = () => {
-//     let stream = src(['src/js/main.js',])
+//     let stream = src(['src/js/app.js',])
 //         .pipe(babel({ presets: ['@babel/preset-env'] }))
-//         .pipe(concat(isProduction ? 'main.min.js' : 'main.js'));
+//         .pipe(concat(isProduction ? 'main.min.js' : 'app.js'));
 //
 //     if (isProduction) {
 //         stream = stream.pipe(uglify({ toplevel: true }).on('error', notify.onError()));
@@ -111,14 +111,14 @@ const woff2 = () => {
 // };
 
 const scripts = () => {
-    // let stream = src(['src/js/main.js'])
+    // let stream = src(['src/js/app.js'])
         // .pipe(sourcemaps.init())  // Инициализация sourcemaps
 
         // Обработка модульных импортов с помощью Babel
         // .pipe(babel({ presets: ['@babel/preset-env'], plugins: ['@babel/plugin-transform-modules-commonjs'] }))
 
         // Объединение модулей в один файл
-        // .pipe(concat(isProduction ? 'main.min.js' : 'main.js'));
+        // .pipe(concat(isProduction ? 'main.min.js' : 'app.js'));
 
     // if (isProduction) {
         // stream = stream.pipe(uglify({ toplevel: true }).on('error', notify.onError()));
