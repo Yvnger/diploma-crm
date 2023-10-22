@@ -37,7 +37,7 @@
     background-color: var(--firm);
     color: white;
 
-    &:focus,
+    &:focus-visible,
     &:hover {
       background: #b89eff;
     }
@@ -56,7 +56,7 @@
     background-color: transparent;
     color: var(--firm);
 
-    &:focus,
+    &:focus-visible,
     &:hover {
       outline-color: #9873ff;
       background-color: #b89eff;

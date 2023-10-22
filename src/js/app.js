@@ -1,78 +1,47 @@
-import {APP_CONTAINER_ID, APP_TITLE} from "./utils/config.js";
-import {createHeader} from "./components/header.js";
-import {createMain} from "./components/main.js";
-import {createTable, createTableItem} from "./components/table.js";
-import {getClients} from "./utils/api.js";
-import {createAddClientModal} from "./components/modal.js";
+import {createEl} from "./helpers.js";
+import {appContainer} from "./config.js";
+import {createTestClient} from "./api.js";
+import {createHeader} from "./dom/header.js";
+import {createNewClientButton} from "./dom/newClientButton.js";
+import {Search} from "./classes/Search.class.js";
+import {Table} from "./classes/Table.class.js";
+import {Modal} from "./classes/Modal.class.js";
 
-function appInit() {
-    const appContainer = document.getElementById(APP_CONTAINER_ID);
+(function () {
+    // Creating objects
+    const table = new Table();
+    const search = new Search(table);
 
-    /**
-     * HEADER
-     * @hook main
-     * @hook searchForm
-     * @hook searchInput
-     * @hook searchResultWrap
-     * @hook searchResultList
-     */
-    const header = createHeader();
+    // Header
+    const header = createHeader(search.element());
 
-    /**
-     * MAIN CONTAINER
-     * @hook main
-     * @hook mainContent
-     * @hook addButton
-     */
-    const main = createMain(APP_TITLE);
+    // Main
+    const main = createEl("main", "home");
+    const mainContainer = createEl("div", "container");
 
-    /**
-     * TABLE
-     * @hook main
-     * @hook tableBody
-     * @hook loading
-     */
-    const table = createTable();
+    const mainTitle = createEl("h1", "home__title");
+    mainTitle.innerText = "Клиенты";
 
-    main.addButton.addEventListener('click', () => {
-        const modal = createAddClientModal();
-        document.body.append(modal)
+    const mainButton = createNewClientButton('Добавить клиента');
+    const testButton = createNewClientButton('Создать тестового клиента');
+
+    table.renderList();
+
+    // Events
+    mainButton.button.addEventListener("click", () => {
+        const modal = new Modal("create", table);
+        document.body.append(modal.element())
     })
 
-    renderList(table);
+    testButton.button.addEventListener('click', () => {
+        createTestClient()
+            .then(() => {
+                table.renderList();
+            })
+    })
 
     // Appends
-    appContainer.append(header.main);
-    appContainer.append(main.main);
-    main.mainContent.append(table.main);
-}
-
-/**
- * Render client list via API request
- * @returns {Promise<any>}
- */
-export async function renderList(table) {
-    try {
-        // Добавляем статус загрузки к таблице
-        table.loading.set();
-
-        const request = await getClients();
-
-        // Очищаем текущий контент таблицы
-        table.tableBody.innerHTML = '';
-
-        for (let i = 0; i < request.length; i++) {
-            const item = createTableItem(request[i]);
-            table.tableBody.append(item);
-
-            console.log(request[i].contacts);
-        }
-    } catch (error) {
-        console.error("Ошибка при получении данных:", error);
-    } finally {
-        // Убираем статус загрузки у таблицы
-        table.loading.unset();
-    }
-}
-
-appInit();
+    appContainer.append(header, main);
+    main.append(mainContainer);
+    mainContainer.append(mainTitle, table.createElement(), mainButton.wrap, testButton.wrap);
+})()

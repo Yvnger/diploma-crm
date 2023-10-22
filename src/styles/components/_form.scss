@@ -41,6 +41,10 @@
     &::placeholder {
       font-size: 0;
     }
+
+    &--invalid {
+      border-color: var(--red);
+    }
   }
 
   &__input:required + &__label:after {
